@@ -1,0 +1,59 @@
+{
+  "v": 1,
+  "card": {
+    "name": "Avery Lin",
+    "title": "Frontend Engineer",
+    "summary": "Builds SaaS dashboards and design systems with React and TypeScript.",
+    "location": "Taipei",
+    "experiences": [
+      {
+        "role": "Frontend Engineer",
+        "org": "Northwind Labs",
+        "start": "2023-04",
+        "end": "",
+        "current": true,
+        "what": "SaaS dashboard, design system",
+        "highlights": [
+          "Built the React and TypeScript front-end architecture",
+          "Cut dashboard load time from 4.2s to 1.6s"
+        ]
+      },
+      {
+        "role": "Front-end Developer",
+        "org": "Bluewhale Interactive",
+        "start": "2021-07",
+        "end": "2023-03",
+        "current": false,
+        "what": "E-commerce, WebSocket",
+        "highlights": []
+      }
+    ],
+    "education": [
+      {
+        "school": "National Tsing Hua University",
+        "major": "Computer Science",
+        "degree": "BS",
+        "start": "2017",
+        "end": "2021"
+      }
+    ],
+    "skills": [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Node.js",
+      "Storybook",
+      "Figma"
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/example"
+      }
+    ]
+  },
+  "fromChat": [
+    "experiences"
+  ],
+  "resumeEmail": "avery.lin@example.com"
+}
