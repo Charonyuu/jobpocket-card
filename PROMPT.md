@@ -30,16 +30,18 @@
 }
 ```
 
-做好後產生連結：
-- 如果你能執行程式，用下面這段 Python 產生連結，然後把連結給我（不要自己手打編碼，一定要用程式產生）：
+做好後給我打開的方法（連結大約 1000 個亂碼字元，你自己重打一定會打錯，所以不要手打）：
+- 如果你能執行程式：用下面這段 Python 產生 `jobpocket-card.html`，讓我下載這個檔案（我打開它就會跳到我的卡）。不能給檔案的話，把程式印出的連結原封不動放在程式碼區塊裡。
 
 ```python
 import json, zlib, base64
 card = {...}  # 上面整理好的 JSON
 data = json.dumps(card, ensure_ascii=False, separators=(",", ":")).encode()
-print("https://yourjobpocket.com/ai#d=" + base64.urlsafe_b64encode(zlib.compress(data, 9)).decode().rstrip("="))
+url = "https://yourjobpocket.com/ai#d=" + base64.urlsafe_b64encode(zlib.compress(data, 9)).decode().rstrip("=")
+open("jobpocket-card.html", "w").write(f'<meta charset="utf-8"><meta http-equiv="refresh" content="0; url={url}"><a href="{url}">打開我的履歷卡</a>')
+print(url)
 ```
 
-- 如果你不能執行程式：把整份 JSON 放在一個程式碼區塊裡，第一行寫 `JPCARD v1`，請我整段複製，貼到 https://yourjobpocket.com/ai 的「貼上 AI 給的內容」。
+- 如果你不能執行程式，或我說連結打不開：把整份 JSON 放在一個程式碼區塊裡，第一行寫 `JPCARD v1`，請我整段複製，貼到 https://yourjobpocket.com/ai 的「貼上 AI 給的內容」。
 
 最後用一小段話告訴我：點開是預覽，還沒公開；確認內容後用我的信箱收 6 位數驗證碼綁定；之後我自己選誰看得到（只放網站、給獵頭、要不要讓 AI 和 Google 搜得到）。這個連結裡有我的履歷內容，不要貼給別人。

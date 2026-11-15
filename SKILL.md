@@ -64,39 +64,44 @@ Follow `schema/card.v1.json`. Shape:
 
 Write the JSON to a file, e.g. `card.json`.
 
-## 5. Make the link
+## 5. Make the link — never retype it
 
-Pick the first option that works in your environment:
+The link is about 1,000 random-looking characters. If you copy it into your reply by hand you will
+very likely change a character and the link will not open (tested: it happened). So:
 
-**A. You can run code** (Claude with code execution, ChatGPT, Claude Code, Codex):
+- **Never write the long link out yourself.** Always produce it with the script, and hand it to the
+  user in a way that does not need retyping.
+
+**A. You run on the user's computer** (Claude Code, Codex):
 
 ```bash
-python3 scripts/make_link.py card.json
-# or: node scripts/make_link.mjs card.json
+python3 scripts/make_link.py card.json --open
 ```
 
-It prints `https://yourjobpocket.com/ai#d=…`. The résumé data is compressed into the part after `#`, which
-browsers never send to a server; the draft is only created when the user opens it.
-If you cannot find the script file, the same thing in three lines of Python:
+This opens the preview in the user's browser and writes `jobpocket-card.html` (a tiny page that
+forwards to the exact link). Tell the user it is open, and give the path of `jobpocket-card.html`
+in case they want to open it again. If the script says it could not open a browser, give them that
+file path. If you have internet access, `--post` instead prints a short 24-hour link (under 100
+characters) that is safe to paste: `python3 scripts/make_link.py card.json --post --open`.
+
+**B. You are a chat app that can run code** (ChatGPT, Claude with code execution): run the script
+(or the three lines of Python below), then give the user `jobpocket-card.html` **as a file to
+download** — they open it and land on their card. Only if you cannot share files, show the link
+inside a code block exactly as the code printed it, and also offer route C.
 
 ```python
 import json, zlib, base64
 data = json.dumps(card, ensure_ascii=False, separators=(",", ":")).encode()
-print("https://yourjobpocket.com/ai#d=" + base64.urlsafe_b64encode(zlib.compress(data, 9)).decode().rstrip("="))
+url = "https://yourjobpocket.com/ai#d=" + base64.urlsafe_b64encode(zlib.compress(data, 9)).decode().rstrip("=")
+open("jobpocket-card.html", "w").write(f'<meta charset="utf-8"><meta http-equiv="refresh" content="0; url={url}"><a href="{url}">打開我的履歷卡</a>')
 ```
 
-Never type or copy the encoded part by hand — always produce it with code.
+**C. You cannot run code, or the link did not open:** give the user the JSON in one code block,
+starting with the line `JPCARD v1`, and tell them to paste the whole block at
+https://yourjobpocket.com/ai (the "貼上 AI 給的內容" box). Plain JSON copies safely.
 
-**B. You can reach the internet** (Claude Code, Codex) and the user prefers a short link:
-
-```bash
-python3 scripts/make_link.py card.json --post
-```
-
-It creates the draft on Job Pocket and prints a short-lived link (24 hours).
-
-**C. You cannot run code:** give the user the JSON in one code block, starting with the line `JPCARD v1`,
-and tell them to paste the whole block at https://yourjobpocket.com/ai (the "貼上 AI 給的內容" box).
+The résumé data sits after `#` in the link, which browsers never send to a server; the draft is only
+created when the user opens it.
 
 ## 6. Tell the user what happens next
 
