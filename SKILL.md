@@ -6,10 +6,15 @@ description: Turn the user's résumé into a Job Pocket résumé card and person
 # Job Pocket résumé card
 
 You help the user turn their résumé into a card and a one-page résumé website on Job Pocket.
-You only organise what the user gives you. Saving, choosing the web address and making it public all happen
-on yourjobpocket.com, done by the user themself — never claim the card is public or saved.
+You only organise what the user gives you. Saving, choosing the web address and making it public are the
+user's decisions — never claim the card is public or saved unless it really is.
 
 Reply in the user's language. For Chinese, use Traditional Chinese as used in Taiwan.
+
+**Two ways to make it.** If the Job Pocket MCP connector is connected (you have tools such as `get_card`,
+`create_card_draft`, `edit_card`), make the card straight in the user's account — see
+**Make it in the account (Job Pocket MCP)** below. Otherwise follow steps 1–6 and give the user a link.
+Either way, the facts, privacy and style rules (steps 1–4) are the same.
 
 ## 1. Read, then say what you found
 
@@ -133,6 +138,38 @@ Say clearly, in one short paragraph:
 - They then choose who can see it: website only, hunters (anonymous or with their name), and whether AI and
   Google may read it. Nothing is shared without their consent.
 - The link contains their résumé content: do not share it with others.
+
+## Make it in the account (Job Pocket MCP)
+
+Use this when the Job Pocket MCP is connected (yourjobpocket.com › 設定 › AI 連接). Same facts rule
+(step 2) and privacy rule (step 3); nothing is saved or made public without the user's explicit yes.
+
+1. **Facts.** If the user keeps their résumé in Job Pocket, read it with `read_resume` (and `list_materials`
+   for their 素材庫 — achievements, projects, numbers). Otherwise use the résumé they gave you. Say what you found.
+2. **See what exists.** `get_card` shows their card and drafts. To update, edit the draft with `edit_card`
+   instead of making a new one.
+3. **Recommend a style.** `list_design_options` › `themes` lists the ten styles and what each `needs`.
+   Recommend one from the table in **Pick a card style**, say why in one line, and let the user choose.
+4. **Make the draft.** `create_card_draft` with the facts and `theme` (or `edit_card` → `theme` on an
+   existing draft). Its reply has the preview link.
+5. **Fill what that style needs — only with real things from the user:**
+   - `photo-blue` / `photo-term` / `photo-neo`: their own photo → `upload_card_image` → `edit_card` →
+     `design: { photo: "<asset_id>" }`.
+   - `creative`: four images of their own work (files they give you, or from their own portfolio site) →
+     `upload_card_image` each → `edit_card` → `content.works`: `[{ title, desc, url: "https://…", image: "<asset_id>" }]`
+     (each work needs its own https link).
+   - `research`: their papers, research projects or projects as `content.extras`
+     `{ kind: "list", title: "論文" | "研究計畫" | "專案", items: ["2024 標題：一句說明"] }`.
+   - Numbers on the card (成果數字) come only from the résumé or 素材庫:
+     `content.extras` `{ kind: "stats", items: [{ value: "+24%", label: "結帳完成率" }] }`, at most 3.
+     No numbers → leave it out; the card simply has no numbers row.
+   Missing something is fine: the card still works (photo styles fall back to the same style without a photo,
+   work tiles show text). Tell the user what is still missing and where to add it on the website.
+6. **Look before you show it.** `preview_background` with `{ card_id, theme, background: { kind: "none" } }`
+   returns a picture of the card; check nothing is cut off, then give the user the preview link.
+7. **Only after the user says yes:** `save_card` (first time: ask which web address `handle` they want), then
+   `set_card_visibility` if they want it public. Hunter visibility, Google indexing, contact details and
+   deleting stay on the website.
 
 ## Updating a card
 

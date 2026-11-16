@@ -43,6 +43,12 @@ git clone https://github.com/Charonyuu/jobpocket-card ~/.codex/skills/jobpocket-
 | 只放網站 | 可以 | 不行 | 可以選 |
 | 先關著 | 不行 | 不行 | 不行 |
 
+## 有接 Job Pocket MCP 的話：直接做進你的帳號
+
+在 Job Pocket 網站「設定 › AI 連接」把 MCP 接到你的 AI（Claude、ChatGPT、Codex、Cursor），它就能直接讀你存在 Job Pocket 的履歷和素材庫、
+依職務推薦一款卡片樣式、把卡做成草稿，並補上那款需要的東西：照片款放你的大頭照、作品牆放 4 張你的作品圖、研究員放論文和專案、成果數字只用素材庫裡的。
+它會先給你預覽連結，你說好了才存檔、才公開。
+
 ## 把自己原本的網站照搬過來
 
 有接 Job Pocket MCP 的 AI（Claude Code、Codex）可以把你自己的個人網站「一模一樣」搬到 Job Pocket 網址頁：
