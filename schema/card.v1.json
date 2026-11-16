@@ -163,6 +163,21 @@
       "type": "string",
       "maxLength": 254,
       "description": "The email printed on the résumé. Never shown; only a hash is kept to give the 本人認證 badge when the person saves with the same email."
+    },
+    "theme": {
+      "enum": [
+        "clean",
+        "term",
+        "neo",
+        "magazine",
+        "research",
+        "creative",
+        "dev",
+        "photo-blue",
+        "photo-term",
+        "photo-neo"
+      ],
+      "description": "Optional card style, picked from the person's role (see SKILL.md › Pick a card style). Anything else is ignored and the website uses clean (極簡白). The person can switch styles on the preview page."
     }
   }
 }

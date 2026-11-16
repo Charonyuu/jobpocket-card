@@ -26,7 +26,8 @@
     "links": [{ "label": "作品集", "url": "https://…（只放履歷上或我給的 https 連結）" }]
   },
   "fromChat": ["只在對話裡說、履歷上沒有的欄位名稱，例如 experiences"],
-  "resumeEmail": "履歷上印的 Email（不會公開，只用來確認綁定的人是履歷本人）"
+  "resumeEmail": "履歷上印的 Email（不會公開，只用來確認綁定的人是履歷本人）",
+  "theme": "卡片樣式（選填，依我的職務挑一個代號：clean 極簡白、term 終端機（後端、SRE）、dev Developer（前端、其他工程）、neo Neo 黃藍（行銷、新創、PM）、magazine 雜誌米色（編輯、寫作）、research 研究員（研究、醫藥、資料科學）、creative 作品牆（設計、創作）；不確定就填 clean）"
 }
 ```
 

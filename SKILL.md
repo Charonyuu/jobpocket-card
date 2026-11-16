@@ -46,7 +46,8 @@ Follow `schema/card.v1.json`. Shape:
     "links": [{ "label": "", "url": "https://" }]
   },
   "fromChat": [],
-  "resumeEmail": ""
+  "resumeEmail": "",
+  "theme": "clean"
 }
 ```
 
@@ -61,6 +62,27 @@ Follow `schema/card.v1.json`. Shape:
   `skills`, `links`) that contain anything the user only said in the chat.
 - `resumeEmail`: the email printed on the résumé, if any. It is never shown; Job Pocket only keeps a hash to
   check that the person who saves the card owns the résumé (they get a "本人認證" badge if it matches).
+
+- `theme` (optional): the card style, from the table below. Leave it out when unsure; the website starts on
+  `clean` and the person can switch styles on the preview page (each style says what it still needs).
+
+### Pick a card style
+
+Ten styles (yourjobpocket.com, 2026-11-16). Pick by the most recent role; do not invent data to fill a style.
+
+| `theme` | Style | Good for | Needs |
+|---|---|---|---|
+| `clean` | 極簡白 | anyone; the default | — |
+| `term` | 終端機 | backend, SRE / DevOps, infra, security, data engineering | — |
+| `dev` | Developer 深綠 | frontend, full-stack, mobile, other engineers | — |
+| `neo` | Neo 黃藍 | marketing, growth, brand, startups, product managers | — |
+| `magazine` | 雜誌米色 | editors, writers, journalists, content leads | — |
+| `research` | 研究員 | research, academia, medicine / pharma, data science | research, papers or projects |
+| `creative` | Creative 作品牆 | designers, illustrators, video / photo, content creators | 4 work images (added on the website) |
+| `photo-blue` / `photo-term` / `photo-neo` | 照片款 | anyone with a photo they want on the card | a photo (added on the website) |
+
+Without what a style needs, the card still works: photo styles fall back to the same style without a photo,
+work tiles show text, the research card shows experience. Prefer a style that needs nothing extra.
 
 Write the JSON to a file, e.g. `card.json`.
 
@@ -141,10 +163,11 @@ without it, make the card with steps 1–6 above and tell the user the 1:1 copy 
 6. `edit_card` → `design: { layout: "canvas" }` and turn the built-in blocks off
    (`blocks: [{ key: "x-<id>", on: true }, …, { key: "experience", on: false }, …]`).
 7. **The small card too.** The card face has no free canvas, so match the site's look with what it has:
-   pick the card theme closest to the site (`list_design_options` › themes, e.g. `pixel` for a pixel-art
-   site), and make a clean scenery background — `preview_canvas` with only the site's backdrop layers
-   (sky gradient, sun, clouds, hills, ground; no text or content panels), then send that PNG to
-   `upload_card_background`. Put the site's profile photo in `design.photo`.
+   pick the card style closest to the site from `list_design_options` › themes (only those ten; e.g. `term`
+   for a terminal / code look, `neo` for bold blocks, `magazine` for an editorial serif site, `creative` for a
+   portfolio — then upload four work images with `upload_card_image` and put them on `content.works`).
+   The ten styles have no background effect, so skip `upload_card_background`. Put the site's profile photo
+   in `design.photo` (the `photo-*` styles use it).
 8. Give the user the preview link. Say what cannot be copied: day/night switches, scroll effects and
    mouse interactions (the default state is copied), and that on phones the canvas scales down as a
    whole instead of re-flowing. Saving and publishing still need the user's yes (`save_card`,
