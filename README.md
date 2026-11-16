@@ -45,7 +45,12 @@ git clone https://github.com/Charonyuu/jobpocket-card ~/.codex/skills/jobpocket-
 
 ## 有接 Job Pocket MCP 的話：直接做進你的帳號
 
-在 Job Pocket 網站「設定 › AI 連接」把 MCP 接到你的 AI（Claude、ChatGPT、Codex、Cursor），它就能直接讀你存在 Job Pocket 的履歷和素材庫、
+沒接也能用（給你連結）；AI 做完會順便教你怎麼接：登入 [Job Pocket 網頁版](https://yourjobpocket.com/workspace/login?next=connect-ai) › 帳號設定 › 「連接你的 AI」產生連接碼，
+Claude Code 貼上頁面給的那行指令就好；Cursor、Codex 這類可以自訂標頭的工具，新增遠端 MCP 伺服器 `https://yourjobpocket.com/mcp`、標頭 `Authorization: Bearer 連接碼`
+（完整教學：[用 MCP 接上 Job Pocket](https://yourjobpocket.com/tutorials/claude-mcp-resume)）。claude.ai 網頁版和 ChatGPT 的自訂連接器還沒確認能接，先用連結。
+連接碼等同你的鑰匙，不要貼到聊天裡。
+
+接上之後，AI 就能直接讀你存在 Job Pocket 的履歷和素材庫、
 依職務推薦一款卡片樣式、把卡做成草稿，並補上那款需要的東西：照片款放你的大頭照、作品牆放 4 張你的作品圖、研究員放論文和專案、成果數字只用素材庫裡的。
 它會先給你預覽連結，你說好了才存檔、才公開。
 

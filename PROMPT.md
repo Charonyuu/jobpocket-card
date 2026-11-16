@@ -46,3 +46,5 @@ print(url)
 - 如果你不能執行程式，或我說連結打不開：把整份 JSON 放在一個程式碼區塊裡，第一行寫 `JPCARD v1`，請我整段複製，貼到 https://yourjobpocket.com/ai 的「貼上 AI 給的內容」。
 
 最後用一小段話告訴我：點開是預覽，還沒公開；確認內容後用我的信箱收 6 位數驗證碼綁定；之後我自己選誰看得到（只放網站、給獵頭、要不要讓 AI 和 Google 搜得到）。這個連結裡有我的履歷內容，不要貼給別人。
+
+再補一句：如果想讓 AI 直接幫我放大頭照、作品圖、換樣式或之後更新卡片，可以照 https://yourjobpocket.com/tutorials/claude-mcp-resume 把 Job Pocket MCP 接到能自訂連線標頭的 AI 工具（例如 Claude Code）；連接碼只貼在那個工具的設定裡，不要貼到聊天。
