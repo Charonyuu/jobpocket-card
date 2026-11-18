@@ -217,8 +217,11 @@ without it, make the card with steps 1–6 above and tell the user the 1:1 copy 
    Save the result to a file (big pages: trigger a download instead of printing it).
 3. **Facts first.** Build the card content from the site (`create_card_draft`, or `import_website`),
    same facts rule as above — the ATS résumé only reads this structured content, never the canvases.
-4. **Upload every asset** with `upload_card_image` (`asset:<key>` in the nodes): `{url}` assets → download
-   the file and send its bytes; `{svg}` assets → send the SVG text with `mime_type: "image/svg+xml"`.
+4. **Upload every asset** with `upload_card_image` (`asset:<key>` in the nodes): `{url}` assets → pass
+   `url` (the public https address) and let the server fetch it — never download and base64 the file
+   yourself (a site's worth of images that way costs hundreds of thousands of tokens); `{svg}` assets →
+   send the SVG text as `data` with `mime_type: "image/svg+xml"`. Only local files with no public URL go
+   as `data` (base64).
    Small pixel images are fine (they are scaled up by whole pixels). Replace `asset:<key>` with the
    returned `asset_id`.
 5. **One canvas per screen**: `set_canvas_block` with `{ ...canvas, keepColors: true }` (keeps the site's
